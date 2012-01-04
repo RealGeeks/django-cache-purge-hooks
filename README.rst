@@ -25,6 +25,7 @@ Usage
 Add 'cache_purge_hooks' to your INSTALLED_APPS.
 
 ::
+
     #our pretend model
     class Post(models.Model):
       title = models.CharField(max_length=200)
@@ -42,16 +43,17 @@ If any instance has multiple related urls, define a custom get_absolute_urls() m
 that returns a list of urls to invalidate:
 
 ::
+
     class Category(models.Model):
       name = models.CharField(max_length=200)
       slug = models.SlugField(unique=True,max_length=200)
       title = models.CharField(max_length=127,blank=True)
-
+      
       def get_absolute_url(self):
         return reverse("category", kwargs={
           "category": self.slug
         })
-
+      
       def get_absolute_urls(self):
         gau = self.get_absolute_url()
         return [gau, reverse('blog_home'),]
@@ -71,11 +73,12 @@ a function that takes an instance and returns a list of urls.
 For example:
 
 ::
+
     from facebook_comments.models import FacebookCommentCache
     def purge_related_blog(instance):
       pr = urlparse.urlparse(instance.url)
       return [pr.path, ]
-    
+        
     cache_purge_hook(FacebookCommentCache, purge_related_blog)
 
 This is also useful because in the case above, the site is utilizing another reusable app
