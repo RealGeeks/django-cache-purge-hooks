@@ -5,14 +5,14 @@ from django.conf import settings
 #STUB config options here
 VARNISH_HOST = settings.VARNISH_HOST
 VARNISH_PORT = settings.VARNISH_PORT
-
 VARNISH_DEBUG = settings.DEBUG
-
-VARNISH_SITE_DOMAIN = ".*"
+VARNISH_SECRET = settings.VARNISH_SECRET or None
+VARNISH_SITE_DOMAIN = settings.VARNISH_SITE_DOMAIN or '.*'
 
 class VarnishManager(object):
 	def __init__(self):
-		self.handler = varnish.VarnishHandler([VARNISH_HOST, VARNISH_PORT])
+		varnish_url = "{host}:{port}".format(host=VARNISH_HOST, port=VARNISH_PORT)
+		self.handler = varnish.VarnishHandler(varnish_url, secret=VARNISH_SECRET)
 
 	def __send_command(self, command):
 		if VARNISH_DEBUG:
@@ -32,3 +32,4 @@ class VarnishManager(object):
 		
 	def purge_all(self):
 		return self.expire('.*')
+
