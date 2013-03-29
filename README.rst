@@ -15,7 +15,7 @@ Dependencies
 ============
 
 django-cache-purge-hooks was created in Django 1.3.  Please let me
-know if you have success with it other versions.
+know if you have success with other versions.
 
 Also requires python-varnish package for varnish backends.
 
