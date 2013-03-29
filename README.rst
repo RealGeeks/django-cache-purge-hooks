@@ -14,8 +14,8 @@ was created with other possible backends in mind.
 Dependencies
 ============
 
-django-facebook-comments was created in Django 1.3.  Please let me
-know if you have success with it in lower versions.
+django-cache-purge-hooks was created in Django 1.3.  Please let me
+know if you have success with it other versions.
 
 Also requires python-varnish package for varnish backends.
 
@@ -31,7 +31,7 @@ Add 'cache_purge_hooks' to your INSTALLED_APPS.
       title = models.CharField(max_length=200)
       slug = models.SlugField(unique=True,max_length=200)
       body = models.TextField(blank=True,null=True)
-    
+
     from cache_purge_hooks import cache_purge_hook
     cache_purge_hook(Post)
 
@@ -48,12 +48,12 @@ that returns a list of urls to invalidate:
       name = models.CharField(max_length=200)
       slug = models.SlugField(unique=True,max_length=200)
       title = models.CharField(max_length=127,blank=True)
-      
+
       def get_absolute_url(self):
         return reverse("category", kwargs={
           "category": self.slug
         })
-      
+
       def get_absolute_urls(self):
         gau = self.get_absolute_url()
         return [gau, reverse('blog_home'),]
@@ -78,7 +78,7 @@ For example:
     def purge_related_blog(instance):
       pr = urlparse.urlparse(instance.url)
       return [pr.path, ]
-        
+
     cache_purge_hook(FacebookCommentCache, purge_related_blog)
 
 This is also useful because in the case above, the site is utilizing another reusable app
@@ -89,7 +89,11 @@ provide a get_absolue_urls().
 Configuration
 =============
 
-No configuation options yet.
+- VARNISH_HOST
+- VARNISH_PORT
+- VARNISH_DEBUG
+- VARNISH_SECRET
+- VARNISH_SITE_DOMAIN
 
 Contributors
 ============
