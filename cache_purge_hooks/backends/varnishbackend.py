@@ -1,35 +1,38 @@
-import varnish
 import logging
+import subprocess
+
 from django.conf import settings
 
-#STUB config options here
-VARNISH_HOST = settings.VARNISH_HOST
-VARNISH_PORT = settings.VARNISH_PORT
-VARNISH_DEBUG = settings.DEBUG
-VARNISH_SECRET = settings.VARNISH_SECRET or None
-VARNISH_SITE_DOMAIN = settings.VARNISH_SITE_DOMAIN or '.*'
+logger = logging.getLogger('django.cache_purge_hooks')
+
+VARNISHADM_HOST = getattr(settings, 'VARNISHADM_HOST', 'localhost')
+VARNISHADM_PORT = getattr(settings, 'VARNISHADM_PORT', 6082)
+VARNISHADM_SECRET = getattr(settings, 'VARNISHADM_SECRET', '/etc/varnish/secret')
+VARNISHADM_SITE_DOMAIN = getattr(settings, 'VARNISHADM_SITE_DOMAIN', '.*')
+VARNISHADM_BIN = getattr(settings, 'VARNISHADM_ADM_BIN', '/usr/bin/varnishadm')
 
 class VarnishManager(object):
-	def __init__(self):
-		varnish_url = "{host}:{port}".format(host=VARNISH_HOST, port=VARNISH_PORT)
-		self.handler = varnish.VarnishHandler(varnish_url, secret=VARNISH_SECRET)
 
-	def __send_command(self, command):
-		if VARNISH_DEBUG:
-			logging.info("unrun cache command (debug on): {0}".format(command))
-		else:
-			self.handler.fetch(command.encode('utf-8'))
+    def purge(self, url):
+        command = 'ban req.http.host ~ "{host}" && req.url ~ "{url}"'.format(
+            host=VARNISHADM_SITE_DOMAIN.encode('ascii'),
+            url=url.encode('ascii'),
+        )
+        self.send_command(command)
 
-	def close(self):
-		self.handler.close()
+    def purge_all(self):
+        self.purge('.*')
 
-	def purge(self, command):
-		cmd = r'ban req.http.host ~ "{host}" && req.url ~ "{url}"'.format(
-			host = VARNISH_SITE_DOMAIN.encode('ascii'),
-			url = command.encode('ascii'),
-		)
-		self.__send_command(cmd)
-		
-	def purge_all(self):
-		return self.expire('.*')
+    def close(self):
+        logger.info('VarnishManager.close() does nothing')
 
+    def send_command(self, command):
+        args = [VARNISHADM_BIN, '-S', VARNISHADM_SECRET, '-T', VARNISHADM_HOST+':'+str(VARNISHADM_PORT), command]
+        try:
+            subprocess.check_call(args)
+        except subprocess.CalledProcessError as error:
+            logger.error('Command "{0}" returned {1}'.format(' '.join(args), error.returncode))
+            return False
+        else:
+            logger.debug('Command "{0}" executed successfully'.format(' '.join(args)))
+            return True

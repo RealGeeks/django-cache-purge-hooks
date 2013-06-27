@@ -17,8 +17,6 @@ Dependencies
 django-cache-purge-hooks was created in Django 1.3.  Please let me
 know if you have success with other versions.
 
-Also requires python-varnish package for varnish backends.
-
 Usage
 =====
 
@@ -89,17 +87,26 @@ provide a get_absolue_urls().
 Configuration
 =============
 
-- VARNISH_HOST
-- VARNISH_PORT
-- VARNISH_DEBUG
-- VARNISH_SECRET
-- VARNISH_SITE_DOMAIN
+All settings are optional.
+
+- VARNISHADM_HOST: host of varnish management interface. Defaults to `"localhost"`
+- VARNISHADM_PORT: port of varnish management interface. Defaults to `6082`
+- VARNISHADM_SECRET: file path of varnish secret. Be sure to give read permission to your
+  django process. Defaults to `"/etc/varnish/secret"`
+- VARNISHADM_SITE_DOMAIN: the site domain used to purge the urls. Regex is allowed.
+  Defaults to `".*"`
+- VARNISHADM_BIN: path to `varnishadm` executable. Defaults to `"/usr/bin/varnishadm"`
+
+You might want to configure a logger for `'django.cache_purge_hooks'` on `LOGGING`,
+see the django docs for more details on `LOGGING` setting.
 
 Contributors
 ============
 
   * `Shu Zong Chen`_
+  * `Igor Sobreira`_
 
 .. CONTRIBUTORS
 
 .. _`Shu Zong Chen`: http://freelancedreams.com/
+.. _`Igor Sobreira`: http://igorsobreira.com/
