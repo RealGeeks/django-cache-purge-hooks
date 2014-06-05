@@ -87,6 +87,15 @@ provide a get_absolue_urls().
 Configuration
 =============
 
+For Varnish backend:
+
+`CACHE_PURGE_HOOKS_BACKEND = 'cache_purge_hooks.backends.varnishbackend.VarnishManager'`
+
+or for Nginx backend:
+
+`CACHE_PURGE_HOOKS_BACKEND = 'cache_purge_hooks.backends.nginxbackend.NginxManager'`
+
+
 Varnish Backend
 ---------------
 

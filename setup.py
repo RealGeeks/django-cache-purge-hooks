@@ -1,5 +1,13 @@
 from setuptools import setup, find_packages
 
+install_requires = ['requests']
+
+try:
+    import importlib
+except ImportError:
+    install_requires.append('importlib')
+
+
 setup(
     name = 'django-cache-purge-hooks',
     version = '0.3.1',
@@ -10,9 +18,7 @@ setup(
     long_description = "Pluggable django app to purge caches.",
     license = "MIT License",
     keywords = "django cache purge varnish nginx hook",
-    install_requires = [
-        'requests',
-    ],
+    install_requires = install_requires,
     classifiers = [
         'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
