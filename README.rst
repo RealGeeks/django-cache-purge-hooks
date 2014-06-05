@@ -87,6 +87,12 @@ provide a get_absolue_urls().
 Configuration
 =============
 
+Varnish Backend
+---------------
+
+NOTE: The varnish backend works by forking and calling `varnishadm`, so you'll
+need that installed on your machine for it to work
+
 All settings are optional.
 
 - VARNISHADM_HOST: host of varnish management interface. Defaults to `"localhost"`
@@ -100,6 +106,41 @@ All settings are optional.
 You might want to configure a logger for `'django.cache_purge_hooks'` on `LOGGING`,
 see the django docs for more details on `LOGGING` setting.
 
+NGINX Backend
+-------------
+
+The nginx backend takes a bit of work to set up.  You'll need the
+_ngx_cache_purge module installed.  Then, you will need to set up the
+nginx.conf like this.  If you already have your proxy_cache stuff set up, just
+add the `proxy_cache_purge` section. (see _nginx_cache_purge README for more):
+
+
+::
+
+http {
+    proxy_cache_path  /tmp/cache  keys_zone=tmpcache:10m;
+
+    server {
+        location / {
+            proxy_pass         http://127.0.0.1:8000;
+            proxy_cache        tmpcache;
+            proxy_cache_key    $uri$is_args$args;
+            proxy_cache_purge  PURGE from 127.0.0.1;
+        }
+    }
+}
+
+
+Finally, Set the following configuration options in your settings.py:
+
+- NGX_CACHE_PURGE_HOST: nginx hostname to send PURGE command to (defaults to localhost)
+- NGX_CACHE_PURGE_PORT: port to send PURGE command to (defaults to 80)
+
+Changelog
+============
+0.4.0: Added nginx backend
+
+
 Contributors
 ============
 
@@ -110,3 +151,6 @@ Contributors
 
 .. _`Shu Zong Chen`: http://freelancedreams.com/
 .. _`Igor Sobreira`: http://igorsobreira.com/
+.. _`Kevin McCarthy`: http://kevinmccarthy.org/
+
+.. _ngx_cache_purge: https://github.com/FRiCKLE/ngx_cache_purge
