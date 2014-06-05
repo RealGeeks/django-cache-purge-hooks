@@ -1,8 +1,0 @@
-# use glob syntax.
-syntax: glob
-
-*.swp
-*.pyc
-build/*
-dist/*
-django_snippet.egg-info/*
