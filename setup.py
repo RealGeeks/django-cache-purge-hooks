@@ -10,6 +10,9 @@ setup(
     long_description = "Pluggable django app to purge caches.",
     license = "MIT License",
     keywords = "django cache purge varnish nginx hook",
+    install_requires = [
+        'requests',
+    ],
     classifiers = [
         'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
