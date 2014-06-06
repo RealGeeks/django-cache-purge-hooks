@@ -168,8 +168,8 @@ You can run tests in all supported environments by running tox.
 
 Changelog
 ============
-0.4.1: Add NGX_CACHE_PURGE_HOST_HEADER option
-0.4.0: Added nginx backend
+  * 0.4.1: Add NGX_CACHE_PURGE_HOST_HEADER option
+  * 0.4.0: Added nginx backend
 
 
 Contributors
