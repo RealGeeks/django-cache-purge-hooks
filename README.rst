@@ -162,6 +162,7 @@ Contributors
 
   * `Shu Zong Chen`_
   * `Igor Sobreira`_
+  * `Kevin McCarthy`_
 
 .. CONTRIBUTORS
 
