@@ -10,14 +10,14 @@ except ImportError:
 
 setup(
     name = 'django-cache-purge-hooks',
-    version = '0.3.1',
+    version = '0.4.0',
     packages = find_packages(),
     author = 'Shu Zong Chen',
     author_email = 'shu.chen@freelancedreams.com',
     description = 'Drop-in cache (e.g. varnish) purging hooks for django',
     long_description = "Pluggable django app to purge caches.",
-    license = "MIT License",
-    keywords = "django cache purge varnish nginx hook",
+    license = "MIT",
+    keywords = "django cache purge varnish nginx",
     install_requires = install_requires,
     classifiers = [
         'Development Status :: 5 - Production/Stable',
