@@ -19,6 +19,11 @@ Dependencies
 django-cache-purge-hooks was created in Django 1.3.  Please let me
 know if you have success with other versions.
 
+Support
+=======
+
+django-cache-purge hooks supports Django 1.4 - 1.7 and python versions 2.6 - 2.7
+
 Usage
 =====
 
