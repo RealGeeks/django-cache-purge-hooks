@@ -16,12 +16,6 @@ There are currently two supported backends: varnish and Nginx
 There were two hard things in computer science: naming things and cache
 invalidation.  Now there is only one hard thing :neckbeard:
 
-Dependencies
-============
-
-django-cache-purge-hooks was created in Django 1.3.  Please let me
-know if you have success with other versions.
-
 Support
 =======
 
