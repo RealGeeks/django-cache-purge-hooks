@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-DJANGO_SETTINGS_MODULE=settings py.test
+DJANGO_SETTINGS_MODULE=sampleproject.settings py.test --create-db

@@ -8,7 +8,8 @@ except ImportError:
         from cache_purge_hooks.utils import import_by_path as import_string
 
 def _get_manager():
-    return import_string(settings.CACHE_PURGE_HOOKS_BACKEND)
+    manager_cls =  import_string(settings.CACHE_PURGE_HOOKS_BACKEND)
+    return manager_cls()
 
 class CacheManager(object):
 	def __init__(self):
@@ -17,8 +18,9 @@ class CacheManager(object):
 	def __enter__(self):
 		return self
 
-	def __exit__(self, exc_type, exc_value, traceback):
-		self.manager.close()
+        def __exit__(self, *args):
+            if hasattr(self.manager, 'close'):
+                self.manager.close()
 
 	def purge(self, command):
 		self.manager.purge(command)

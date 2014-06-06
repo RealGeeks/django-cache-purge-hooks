@@ -10,5 +10,5 @@ def _build_url(path):
 
 class NginxManager(object):
     def purge(self, path):
-        requests.request("PURGE", _build_url(path))
-
+        response = requests.request("PURGE", _build_url(path))
+        return response.status_code == 200

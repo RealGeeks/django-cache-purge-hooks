@@ -6,3 +6,14 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
     }
 }
+
+INSTALLED_APPS = [
+    'tests'
+]
+
+DATABASES = {
+    'default': {
+      'NAME': 'test_db',
+      'ENGINE': 'django.db.backends.sqlite3'
+    }
+}

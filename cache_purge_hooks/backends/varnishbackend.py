@@ -23,9 +23,6 @@ class VarnishManager(object):
     def purge_all(self):
         self.purge('.*')
 
-    def close(self):
-        logger.info('VarnishManager.close() does nothing')
-
     def send_command(self, command):
         args = [VARNISHADM_BIN, '-S', VARNISHADM_SECRET, '-T', VARNISHADM_HOST+':'+str(VARNISHADM_PORT), command]
         try:
