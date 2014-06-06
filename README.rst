@@ -121,9 +121,9 @@ NGINX Backend
 -------------
 
 The nginx backend takes a bit of work to set up.  You'll need the
-_ngx_cache_purge module installed.  Then, you will need to set up the
+`ngx_cache_purge`_ module installed.  Then, you will need to set up the
 nginx.conf like this.  If you already have your proxy_cache stuff set up, just
-add the `proxy_cache_purge` section. (see _nginx_cache_purge README for more):
+add the `proxy_cache_purge` section. (see `ngx_cache_purge`_ README for more):
 
 
 ::
@@ -164,4 +164,4 @@ Contributors
 .. _`Igor Sobreira`: http://igorsobreira.com/
 .. _`Kevin McCarthy`: http://kevinmccarthy.org/
 
-.. _ngx_cache_purge: https://github.com/FRiCKLE/ngx_cache_purge
+.. _`ngx_cache_purge`: https://github.com/FRiCKLE/ngx_cache_purge
