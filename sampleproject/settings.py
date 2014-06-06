@@ -8,4 +8,3 @@ DATABASES = {
       'NAME':':memory:'
     }
 }
-TEST_RUNNER = 'django_pytest.test_runner.run_tests'
