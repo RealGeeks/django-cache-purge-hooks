@@ -8,8 +8,7 @@ cache invalidation.
 This app basically provides a mechanism to easily hook into the
 model callbacks to invalidate your front-end cache when needed.
 
-Currently, only a varnish backend is implemented, but the design
-was created with other possible backends in mind.
+There are currently two supported backends: varnish and Nginx
 
 There were two hard things in computer science: naming things and cache
 invalidation.  Now there is only one hard thing :neckbeard:
