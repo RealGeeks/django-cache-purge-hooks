@@ -2,6 +2,9 @@
 Overview
 ========
 
+.. image:: https://travis-ci.org/RealGeeks/django-cache-purge-hooks.svg?branch=master
+    :target: https://travis-ci.org/RealGeeks/django-cache-purge-hooks
+
 django-cache-purge-hooks is a reusable Django app to handle
 cache invalidation.
 
