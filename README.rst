@@ -155,6 +155,13 @@ Finally, Set the following configuration options in your settings.py:
 - NGX_CACHE_PURGE_HOST: nginx hostname to send PURGE command to (defaults to localhost)
 - NGX_CACHE_PURGE_PORT: port to send PURGE command to (defaults to 80)
 
+Running Tests
+=============
+
+Run tests with ./runtests.sh.
+
+You can run tests in all supported environments by running tox.
+
 Changelog
 ============
 0.4.0: Added nginx backend
