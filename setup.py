@@ -10,7 +10,7 @@ except ImportError:
 
 setup(
     name = 'django-cache-purge-hooks',
-    version = '0.4.0',
+    version = '0.4.1',
     packages = find_packages(),
     author = 'Shu Zong Chen',
     author_email = 'shu.chen@freelancedreams.com',

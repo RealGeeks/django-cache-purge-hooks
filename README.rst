@@ -152,8 +152,12 @@ http {
 
 Finally, Set the following configuration options in your settings.py:
 
-- NGX_CACHE_PURGE_HOST: nginx hostname to send PURGE command to (defaults to localhost)
-- NGX_CACHE_PURGE_PORT: port to send PURGE command to (defaults to 80)
+- NGX_CACHE_PURGE_HOST: nginx hostname to send PURGE command to (defaults to
+  localhost)
+- NGX_CACHE_PURGE_PORT: port to send PURGE command to (defaults to
+  80)
+- NGX_CACHE_PURGE_HOST_HEADER: If you want to fake the "Host" header
+  (maybe to get around DNS) you can do that with this option.
 
 Running Tests
 =============
@@ -164,6 +168,7 @@ You can run tests in all supported environments by running tox.
 
 Changelog
 ============
+0.4.1: Add NGX_CACHE_PURGE_HOST_HEADER option
 0.4.0: Added nginx backend
 
 
