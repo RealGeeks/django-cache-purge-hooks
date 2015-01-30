@@ -130,18 +130,18 @@ add the `proxy_cache_purge` section. (see `ngx_cache_purge`_ README for more):
 
 ::
 
-http {
-    proxy_cache_path  /tmp/cache  keys_zone=tmpcache:10m;
+    http {
+        proxy_cache_path  /tmp/cache  keys_zone=tmpcache:10m;
 
-    server {
-        location / {
-            proxy_pass         http://127.0.0.1:8000;
-            proxy_cache        tmpcache;
-            proxy_cache_key    $uri$is_args$args;
-            proxy_cache_purge  PURGE from 127.0.0.1;
+        server {
+            location / {
+                proxy_pass         http://127.0.0.1:8000;
+                proxy_cache        tmpcache;
+                proxy_cache_key    $uri$is_args$args;
+                proxy_cache_purge  PURGE from 127.0.0.1;
+            }
         }
     }
-}
 
 
 Finally, Set the following configuration options in your settings.py:
