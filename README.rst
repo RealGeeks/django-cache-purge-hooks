@@ -174,6 +174,7 @@ You can run tests in all supported environments by running tox.
 
 Changelog
 ============
+  * 0.5.1: Fix bug with dumb nginx backend deleting directory
   * 0.5.0: Add dumb nginx cache purge backend
   * 0.4.2: Add dummy cache backend that does nothing, for testing
   * 0.4.1: Add NGX_CACHE_PURGE_HOST_HEADER option
