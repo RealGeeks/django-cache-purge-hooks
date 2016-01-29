@@ -95,9 +95,13 @@ For Varnish backend:
 
 `CACHE_PURGE_HOOKS_BACKEND = 'cache_purge_hooks.backends.varnishbackend.VarnishManager'`
 
-or for Nginx backend:
+or for (smart) Nginx backend:
 
 `CACHE_PURGE_HOOKS_BACKEND = 'cache_purge_hooks.backends.nginxbackend.NginxManager'`
+
+or for the dumb Nginx backend:
+
+`CACHE_PURGE_HOOKS_BACKEND = 'cache_purge_hooks.backends.dumbnginxbackend.DumbNginxManager'`
 
 
 Varnish Backend
@@ -153,6 +157,14 @@ Finally, Set the following configuration options in your settings.py:
 - NGX_CACHE_PURGE_HOST_HEADER: If you want to fake the "Host" header
   (maybe to get around DNS) you can do that with this option.
 
+Dumb NGINX Backend
+-------------
+
+The dumb nginx backend works by just deleting the entire nginx cache directory.  You'll need to give it the path to the directory:
+
+- DUMB_NGINX_CACHE_PURGE_DIR = '/tmp/nginx_cache'
+
+
 Running Tests
 =============
 
@@ -162,6 +174,7 @@ You can run tests in all supported environments by running tox.
 
 Changelog
 ============
+  * 0.5.0: Add dumb nginx cache purge backend
   * 0.4.2: Add dummy cache backend that does nothing, for testing
   * 0.4.1: Add NGX_CACHE_PURGE_HOST_HEADER option
   * 0.4.0: Added nginx backend
